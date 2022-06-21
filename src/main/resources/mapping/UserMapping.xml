@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.day.springweb.mapper.UserMapper">
+    <resultMap type="com.web.day.springweb.model.User" id="BaseResultMap">
+        <!--
+            column:数据库中表的字段
+            property：数据库中表所有映射的实体类javaBean中的属性名
+         -->
+        <result column="tid" property="id"/>
+        <result column="tname" property="name"/>
+        <result column="temail" property="email"/>
+    </resultMap>
+
+    <select id="Sel"  resultMap="BaseResultMap">
+        select tid, tname, temail
+        from t_user
+        where tid = #{id}
+    </select>
+
+    <update id="updateUser" parameterType="com.web.day.springweb.model.User">
+        update t_user
+        <set>
+            <if test="name != null">
+                tname = #{name },
+            </if>
+            <if test="email != null">
+                temail = #{email}
+            </if>
+        </set>
+        where tid = #{id}
+    </update>
+
+</mapper>

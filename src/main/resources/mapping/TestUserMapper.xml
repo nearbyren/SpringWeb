@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+
+    <resultMap id="BaseResultMap" type="com.web.day.springweb.model.User">
+        <result column="tid" jdbcType="INTEGER" property="id"/>
+        <result column="tname" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select *
+        from t_user
+    </select>
+
+
+</mapper>
