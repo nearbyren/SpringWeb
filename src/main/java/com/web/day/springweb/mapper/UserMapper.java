@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 
 public interface UserMapper {
-    User Sel(String id);
+    User Sel(Integer id);
 
     void updateUser(User user);
 }

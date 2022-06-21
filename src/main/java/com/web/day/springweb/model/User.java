@@ -7,15 +7,19 @@ package com.web.day.springweb.model;
  * @Time: 14:39
  */
 public class User {
-    private String id;
+    private Integer id;
     private String name;
     private String email;
+    private Integer age;
+    private Integer version;
+    private Integer status;
 
-    public String getId() {
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -35,12 +39,39 @@ public class User {
         this.email = email;
     }
 
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", age='" + age + '\'' +
+                ", version='" + version + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

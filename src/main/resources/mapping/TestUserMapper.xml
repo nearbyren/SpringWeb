@@ -5,12 +5,81 @@
     <resultMap id="BaseResultMap" type="com.web.day.springweb.model.User">
         <result column="tid" jdbcType="INTEGER" property="id"/>
         <result column="tname" jdbcType="VARCHAR" property="name"/>
+        <result column="tage" jdbcType="INTEGER" property="age"/>
+        <result column="temail" jdbcType="VARCHAR" property="email"/>
+        <result column="tversion" jdbcType="INTEGER" property="version"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
     </resultMap>
 
-    <select id="findAll" resultMap="BaseResultMap">
-        select *
+    <sql id="sel_field">
+        tid
+        ,tname,tage,temail
+        ,tversion,status
+    </sql>
+
+
+    <select id="testSql" resultMap="BaseResultMap">
+        select
+        <include refid="sel_field"/>
         from t_user
     </select>
 
+    <!--
+    index 在list、Set和数组中,index表示当前迭代的位置，在map中，index代指是元素的key，该参数是可选项。
+    separator mybatis会在每次迭代后给sql语句append上separator属性指定的字符，该参数为可选项
+    item 表示本次迭代获取的元素，若collection为List、Set或者数组，则表示其中的元素；若collection为map，则代表key-value的value，该参数为必选
+    open 表示该语句以什么开始，最常用的是左括弧'('，注意:mybatis会将该字符拼接到整体的sql语句之前，并且只拼接一次，该参数为可选项
+    close 表示该语句以什么结束，最常用的是右括弧')'，注意:mybatis会将该字符拼接到整体的sql语句之后，该参数为可选项
+    -->
+    <select id="testForeach" resultMap="BaseResultMap">
+        select *
+        from t_user where tid in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 
+    <select id="testWhere" parameterType="com.web.day.springweb.model.User" resultMap="BaseResultMap">
+        select *
+        from t_user
+        <where>
+            <if test="id != null">
+                tid = #{id}
+            </if>
+            <if test="name != null">
+                AND tname = #{name}
+            </if>
+        </where>
+    </select>
+
+    <update id="testSet" parameterType="com.web.day.springweb.model.User">
+        update t_user
+        <set>
+            <if test="name !=null">
+                tname = #{name},
+            </if>
+            <if test="email !=null">
+                temail = #{email}
+            </if>
+        </set>
+        where tid= #{id}
+    </update>
+
+    <sql id="slq1">
+        ${prefix}_user
+    </sql>
+    <sql id="sql2">
+        from
+        <include refid="${include_target}"/>
+    </sql>
+
+
+    <select id="testSql2" resultMap="BaseResultMap">
+        select tid,tname
+        <include refid="sql2">
+            <property name="prefix" value="t"/>
+            <property name="include_target" value="slq1"/>
+        </include>
+
+    </select>
 </mapper>

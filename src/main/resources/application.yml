@@ -16,3 +16,12 @@ mybatis:
 #showSql
 server:
   port: 8099
+
+#@RestController
+#public class TestController {
+#@RequestMapping("getUser/{id}")
+# public String GetUser(@PathVariable String id) {
+#     System.out.println("...GetUser  " + id);
+#     return userService.Sel(Integer.valueOf(id)).toString();
+#}
+#http://127.0.0.1:8099/getUser/1

@@ -13,7 +13,7 @@ public class UserService {
     @Resource
     UserMapper userMapper;
 
-    public User Sel(String id) {
+    public User Sel(Integer id) {
         User user = userMapper.Sel(id);
         if (user == null) {
             System.out.println(" user null");

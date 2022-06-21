@@ -19,7 +19,7 @@ public class TestController {
     @RequestMapping("getUser/{id}")
     public String GetUser(@PathVariable String id) {
         System.out.println("...GetUser  " + id);
-        return userService.Sel(id).toString();
+        return userService.Sel(Integer.valueOf(id)).toString();
     }
 
     @RequestMapping("work")
@@ -32,11 +32,11 @@ public class TestController {
     @RequestMapping("update/{id}/{name}/{email}")
     public String updateUser(@PathVariable String id, @PathVariable String name, @PathVariable String email) {
         User user = new User();
-        user.setId(id);
+        user.setId(Integer.valueOf(id));
         user.setName(name);
         user.setEmail(email);
         userService.updateUser(user);
-        return  " - updateUser - " + id;
+        return userService.Sel(Integer.valueOf(id)).toString() + " - updateUser - " + id;
 
     }
 }
